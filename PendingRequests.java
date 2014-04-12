@@ -29,7 +29,7 @@ public class PendingRequests {
 	
 	/**
 	 * Retira um pedido da fila de espera e envia o pedido marcado como não printável no retorno
-	 * @param ID ID do pedido desejado
+	 * @param ID do pedido desejado
 	 * @return Pedido desejado
 	 */
 	public Request getRequest(int ID)
