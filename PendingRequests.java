@@ -27,7 +27,10 @@ public class PendingRequests {
 		return pendingRequests[ID];		
 	}
 	
-	/**
+	/** TODO: verificar validade do algoritmo
+	 * 
+	 * 
+	 * 
 	 * Retira um pedido da fila de espera e envia o pedido marcado como não printável no retorno
 	 * @param ID do pedido desejado
 	 * @return Pedido desejado
