@@ -14,6 +14,9 @@ public class Scene {
 	 */
 	public Scene()
 	{
+		tireFactory = new TireFactory();
+		bodyFactory = new BodyFactory();
+		engineFactory = new EngineFactory();
 		background = new Background();
 		
 		workSites = new WorkSite[Constants.numberOfWorkSites];
@@ -22,13 +25,11 @@ public class Scene {
 		
 		workers = new Worker[Constants.numberOfWorkers];
 		for(int i = 0; i < workers.length; i++)
-			workers[i] = new Worker(workSites[i], i);
+			workers[i] = new Worker(workSites[i], i, bodyFactory, engineFactory, tireFactory);
 		
 		pendingRequests = new PendingRequests();
 		
-		tireFactory = new TireFactory();
-		bodyFactory = new BodyFactory();
-		engineFactory = new EngineFactory();
+
 		
 		scheduler = new Scheduler(pendingRequests, engineFactory, bodyFactory, tireFactory, workSites, workers);
 	}

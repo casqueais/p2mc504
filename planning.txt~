@@ -3,7 +3,6 @@ Plano de ação
 ## Worker ##
 1. Receber fábricas por construtor
 2. Comunicar-se com fábricas pedindo peças
-3. 
 
 ## Scene ##
 1. Fábricas devem ser criadas antes, para que os workers as recebam

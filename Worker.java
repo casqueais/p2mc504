@@ -2,7 +2,13 @@ import java.awt.Point;
 
 
 public class Worker {
+	Body body = null;
+	Engine engine = null;
+	Tire tire = null;
 	WorkSite workSite;
+	BodyFactory bodyFactory;
+	EngineFactory engineFactory;
+	TireFactory tireFactory;
 	Request request;
 	Point position;
 	String []image;
@@ -13,8 +19,11 @@ public class Worker {
 	 * @param workSite Local de Trabalho do Funcionário
 	 * @param ID ID do funcionário (deve ser a mesma do workSite)
 	 */
-	public Worker(WorkSite workSite, int ID)
+	public Worker(WorkSite workSite, int ID, BodyFactory bodyFactory, EngineFactory engineFactory, TireFactory tireFactory)
 	{
+		this.bodyFactory = bodyFactory;
+		this.engineFactory = engineFactory;
+		this.tireFactory = tireFactory;
 		this.workSite = workSite;
 		request = null;
 		this.ID = ID;
@@ -42,9 +51,36 @@ public class Worker {
 	
 	public void Update()
 	{
+		boolean bodyPlaced = false;
+		boolean enginePlaced = false;
+		boolean tirePlaced = false;
+		
 		if(request != null)
 		{
+			bodyFactory.newRequest(request.bodyType);
+			engineFactory.newRequest(request.engineType);
+			tireFactory.newRequest(request.tireType);
 			
+			while (!bodyPlaced || !enginePlaced || !tirePlaced)
+			{
+				if (!bodyPlaced && bodyFactory.hasABody(request.bodyType))
+				{
+					workSite.addPart(bodyFactory.takeProduct(request.bodyType));
+					bodyPlaced = true;
+				}
+				
+				if (!enginePlaced && engineFactory.hasAEngine(request.engineType))
+				{
+					workSite.addPart(engineFactory.takeProduct(request.engineType));
+					enginePlaced = true;
+				}
+				
+				if (!tirePlaced && tireFactory.hasATire(request.tireType))
+				{
+					workSite.addPart(tireFactory.takeProduct(request.tireType));
+					tirePlaced = true;
+				}
+			}
 		}
 	}
 	
